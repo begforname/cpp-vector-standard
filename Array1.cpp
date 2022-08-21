@@ -1,9 +1,17 @@
 #include "Array1.h"
 
-Array1::Array1():arr_(){}
-Array1::Array1(const vector<double>& arr):arr_(arr){}
-Array1::Array1(const Array1& arr):arr_(arr.arr_){}
-Array1::Array1(const initializer_list<double>& init_list):arr_(init_list){}
+Array1::Array1():arr_(){
+    rowArray=true;
+}
+Array1::Array1(const vector<double>& arr):arr_(arr){
+    rowArray=true;
+}
+Array1::Array1(const Array1& arr):arr_(arr.arr_){
+    rowArray=true;
+}
+Array1::Array1(const initializer_list<double>& init_list):arr_(init_list){
+    rowArray=true;
+}
 Array1& Array1::operator = (const Array1& arr){
     arr_ = arr.arr_;
     return *this;
@@ -170,7 +178,12 @@ double Array1::min() const{
     for(auto e:arr_) res = (e>res)?res:e;
     return res;
 }
-Array1 Array1::apply(function<double(double)> func) const{
+Array1 Array1::apply(const function<long double(long double)>& func) const{
+    Array1 res = arr_;
+    for(auto& e:res.arr_) e=func(e);
+    return res;
+}
+Array1 Array1::apply(const function<double(double)>& func) const{
     Array1 res = arr_;
     for(auto& e:res.arr_) e=func(e);
     return res;
