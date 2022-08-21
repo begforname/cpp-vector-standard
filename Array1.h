@@ -8,6 +8,7 @@ using std::function;
 using std::initializer_list;
 using std::exception;
 using std::vector;
+typedef function<double(double)> ApplyFunction1;
 class Array1
 {
     public:
@@ -36,7 +37,8 @@ class Array1
         Array1& operator -= (double num);
         Array1& operator *= (double num);
         Array1& operator /= (double num);
-        Array1 apply(function<double(double)> func) const;
+        Array1 apply(const function<long double(long double)>& func) const;
+        Array1 apply(const function<double(double)>& func) const;
         double& operator[] (unsigned index);
         double operator [](unsigned index) const;
         unsigned size() const;
@@ -48,7 +50,7 @@ class Array1
         decltype(arr_.begin()) begin() {return arr_.begin();}
         decltype(arr_.cend()) end() const {return arr_.cend();}
         decltype(arr_.end()) end() {return arr_.end();}
-
+        bool rowArray;
 
     protected:
 
